@@ -1,23 +1,30 @@
-module.exports = [{
-  name: '基础',
+module.exports = [
+  {
+  name: '项目信息',
   id: 'basic',
   icon: 'th-large',
   sub: [{
-    name: 'Layout 布局',
-    componentName: 'BasicLayout'
+    name: '项目列表',
+    componentName: 'BasicLayout',
+    meta: {
+      title: '首页'
+    }
   }, {
     name: 'Container 布局容器',
     componentName: 'BasicContainer'
-  }]
+  }],
+  meta: {
+    title: '首页'
+  }
 }, {
-  name: 'Form',
+  name: '测试数据',
   id: 'form',
-  icon: 'wpforms',
+  icon: 'chart-line',
   sub: [{
-    name: 'Radio 单选框',
-    componentName: 'FormRadio'
+    name: '覆盖率趋势',
+    componentName: 'CoverChartLine'
   }, {
-    name: 'Checkbox 多选框',
+    name: '未接入项目',
     componentName: 'FormCheckbox'
   }]
 }]

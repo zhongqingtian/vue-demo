@@ -1,6 +1,6 @@
 <template>
 	<div class="chartLine_wrap">
-      <div id="myChart" :style="{ width: '100%', height: '80%' }"></div>
+      <div id="myChart" :style="{ width: '100%', height: '438px' }"></div>
     </div>
 </template>
 <script>
@@ -13,67 +13,33 @@ export default {
       a: [],
       b: [],
       c: [],
-      list:[],
       date: [],
     };
   },
-
 
   mounted() {
     this.searchData();
   },
   methods: {
     searchData() {
-      let x =['2022-01','2022-02','2022-03','2022-04','2022-05','2022-06','2022-07','2022-08','2022-09'];
-      let infos =[{
-        projectName:"account-api.docer.wps.cn",
-        code_nums:[500,600,700,800,1200,1233,6000,5220,7000],
-      },{
-        projectName:"newwpp.docer.wps.cn",
-        code_nums:[200,600,700,900,1200,1233,6000,5220,7000],
-      },{
-        projectName:"jimo-mb-api.docer.wps.cn",
-       code_nums:[100,300,700,600,1200,1233,5000,5220,7000],
-      },{
-        projectName:"picture.docer.wps.cn",
-        code_nums:[500,600,700,800,1200,1233,6000,6220,9000],
-      },{
-        projectName:"picture-api.docer.wps.cn",
-       code_nums:[600,600,8000,1500,2100,1233,4000,5220,8500],
-     },{
-        projectName:"jmsuitmb.docer.wps.cn",
-        code_nums:[350,600,700,800,6522,7000,7162,5220,7000],
-      },{
-        projectName:"smart-mb.docer.wps.cn",
-        code_nums:[500,600,5955,6000,6100,6200,6522,10000,12000],
-      },{
-        projectName:"newdoc.docer.wps.cn",
-       code_nums:[500,9000,9655,10214,12000,12330,60000,52200,70000],
-      }];
       //这里写的是假数据，实际应该是调接口，本文主要是样式的实现，这里就不写啦~
       let data = [
         { year: "2020-10", a: "-2", b: "20", c: "0" },
         { year: "2020-11", a: "23", b: "6", c: "10" },
-        { year: "2020-12", a: "-4", b: "9", c: "5265" },
+        { year: "2020-12", a: "-4", b: "9", c: "23" },
         { year: "2021-01", a: "88", b: "37", c: "25" },
-        { year: "2021-02", a: "65", b: "20", c: "1652" },
+        { year: "2021-02", a: "65", b: "20", c: "44" },
         { year: "2021-03", a: "23", b: "56", c: "9" },
         { year: "2021-04", a: "-10", b: "-5", c: "49" },
         { year: "2021-05", a: "33", b: "6", c: "33" },
         { year: "2021-06", a: "22", b: "76", c: "34" },
         { year: "2021-07", a: "56", b: "76", c: "65" },
         { year: "2021-08", a: "98", b: "81", c: "33" },
-        { year: "2021-09", a: "76", b: "36", c: "1230" },
-        { year: "2021-10", a: "76", b: "66", c: "2690" },
-        { year: "2021-11", a: "100", b: "261", c: "10000" },
-        { year: "2021-12", a: "-20", b: "212", c: "22201" },
-        { year: "2021-09", a: "12.5", b: "201", c: "2215" },
-        { year: "2021-09", a: "100.9", b: "29", c: "210" },
+        { year: "2021-09", a: "76", b: "36", c: "79" },
       ];
-      // this.date = data.map((i) => {
-      //   return i.year;
-      // });
-      this.date = x;
+      this.date = data.map((i) => {
+        return i.year;
+      });
       this.a = data.map((i) => {
         return i.a;
       });
@@ -83,17 +49,6 @@ export default {
       this.c = data.map((i) => {
         return i.c;
       });
-      infos.forEach((item) => {
-          this.list.push({
-            name: item.projectName,
-            type: "line",
-            data: item.code_nums,
-           //  color: "#3F53FF", // 不指定颜色
-            symbolSize: 8, //折线点的大小
-          })
-       })
-     
-      
       this.drawLine(); //折线图
     },
     drawLine() {
@@ -102,12 +57,12 @@ export default {
       // 绘制图表
       myChart.setOption({
         title: {
-          text: "项目代码行数趋势折线", // 图表标题
+          text: "平均提货时数（单/天）",
           top: "30",
           left: "32",
           textStyle: {
             fontSize: 16, //字体大小
-            color: "#ff0f0", //字体颜色
+            color: "#333", //字体颜色
             fontWeight: "500",
           },
         },
@@ -115,7 +70,7 @@ export default {
           //触发类型：坐标轴触发
           trigger: "axis", //触发类型  'item'图形触发：散点图，饼图等无类目轴的图表中使用； 'axis'坐标轴触发；'none'：什么都不触发。
           axisPointer: {
-            type: "cross", //默认为line，line直线，cross十字准星，shadow阴影
+            type: "line", //默认为line，line直线，cross十字准星，shadow阴影
             lineStyle: {
               type: "dashed",
               color: "#808BA9",
@@ -231,7 +186,30 @@ export default {
             },
           },
         },
-        series:this.list,
+        series: [
+          {
+            name: "发货",
+            type: "line", //bar:柱状 line:折线图
+            data: this.a,
+            color: "#00C5AB",
+            // symbol: "circle", //折线点设置为实心点
+            symbolSize: 8, //折线点的大小
+          },
+          {
+            name: "回收",
+            type: "line",
+            data: this.b,
+            color: "#3F53FF",
+            symbolSize: 8, //折线点的大小
+          },
+          {
+            name: "调拨",
+            type: "line",
+            data: this.c,
+            color: "#8DF3E8",
+            symbolSize: 8 //折线点的大小
+          },
+        ],
       });
     },
   },
@@ -241,7 +219,7 @@ export default {
 <style lang="scss" scoped>
  .chartLine_wrap {
     width: auto;
-    height: 800px;
+    height: 438px;
     background: #fff;
  }
 </style>

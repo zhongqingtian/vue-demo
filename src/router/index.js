@@ -6,6 +6,12 @@ Vue.use(Router)
 
 var routes = []
 
+// 路由配置
+routes.push({
+  path:'/',
+  redirect:'/BasicLayout'
+})
+
 menus.forEach((item) => {
   item.sub.forEach((sub) => {
     routes.push({
