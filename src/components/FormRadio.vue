@@ -1,5 +1,3 @@
 <template>
-  <div>
-    这是：Radio 单选框
-  </div>
+  <div>这是：Radio 单选框</div>
 </template>

@@ -8,8 +8,8 @@ var routes = []
 
 // 路由配置
 routes.push({
-  path:'/',
-  redirect:'/BasicLayout'
+  path: '/',
+  redirect: '/BasicLayout'
 })
 
 menus.forEach((item) => {

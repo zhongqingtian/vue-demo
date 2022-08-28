@@ -1,55 +1,75 @@
 <template>
-	<div class="chartLine_wrap">
-      <div id="myChart" :style="{ width: '100%', height: '80%' }"></div>
-    </div>
+  <div class="chartLine_wrap">
+    <div id="myChart" :style="{ width: '100%', height: '80%' }"></div>
+  </div>
 </template>
 <script>
 import * as echarts from "echarts";
 require("echarts/theme/macarons"); //引入主题
 export default {
- name: "hello",
+  name: "hello",
   data() {
     return {
       a: [],
       b: [],
       c: [],
-      list:[],
+      list: [],
       date: [],
     };
   },
-
 
   mounted() {
     this.searchData();
   },
   methods: {
     searchData() {
-      let x =['2022-01','2022-02','2022-03','2022-04','2022-05','2022-06','2022-07','2022-08','2022-09'];
-      let infos =[{
-        projectName:"account-api.docer.wps.cn",
-        code_nums:[500,600,700,800,1200,1233,6000,5220,7000],
-      },{
-        projectName:"newwpp.docer.wps.cn",
-        code_nums:[200,600,700,900,1200,1233,6000,5220,7000],
-      },{
-        projectName:"jimo-mb-api.docer.wps.cn",
-       code_nums:[100,300,700,600,1200,1233,5000,5220,7000],
-      },{
-        projectName:"picture.docer.wps.cn",
-        code_nums:[500,600,700,800,1200,1233,6000,6220,9000],
-      },{
-        projectName:"picture-api.docer.wps.cn",
-       code_nums:[600,600,8000,1500,2100,1233,4000,5220,8500],
-     },{
-        projectName:"jmsuitmb.docer.wps.cn",
-        code_nums:[350,600,700,800,6522,7000,7162,5220,7000],
-      },{
-        projectName:"smart-mb.docer.wps.cn",
-        code_nums:[500,600,5955,6000,6100,6200,6522,10000,12000],
-      },{
-        projectName:"newdoc.docer.wps.cn",
-       code_nums:[500,9000,9655,10214,12000,12330,60000,52200,70000],
-      }];
+      let x = [
+        "2022-01",
+        "2022-02",
+        "2022-03",
+        "2022-04",
+        "2022-05",
+        "2022-06",
+        "2022-07",
+        "2022-08",
+        "2022-09",
+      ];
+      let infos = [
+        {
+          projectName: "xxxdd",
+          code_nums: [500, 600, 700, 800, 1200, 1233, 6000, 5220, 7000],
+        },
+        {
+          projectName: "xxddddvf",
+          code_nums: [200, 600, 700, 900, 1200, 1233, 6000, 5220, 7000],
+        },
+        {
+          projectName: "ssdczz",
+          code_nums: [100, 300, 700, 600, 1200, 1233, 5000, 5220, 7000],
+        },
+        {
+          projectName: "bbbxxx",
+          code_nums: [500, 600, 700, 800, 1200, 1233, 6000, 6220, 9000],
+        },
+        {
+          projectName: "xxfdfx",
+          code_nums: [600, 600, 8000, 1500, 2100, 1233, 4000, 5220, 8500],
+        },
+        {
+          projectName: "ddd",
+          code_nums: [350, 600, 700, 800, 6522, 7000, 7162, 5220, 7000],
+        },
+        {
+          projectName: "oohdhd",
+          code_nums: [500, 600, 5955, 6000, 6100, 6200, 6522, 10000, 12000],
+        },
+        {
+          projectName: "cccc",
+          code_nums: [
+            500, 9000, 9655, 10214, 12000, 12330, 60000, 52200, 70000,
+          ],
+        },
+      ];
       //这里写的是假数据，实际应该是调接口，本文主要是样式的实现，这里就不写啦~
       let data = [
         { year: "2020-10", a: "-2", b: "20", c: "0" },
@@ -84,16 +104,15 @@ export default {
         return i.c;
       });
       infos.forEach((item) => {
-          this.list.push({
-            name: item.projectName,
-            type: "line",
-            data: item.code_nums,
-           //  color: "#3F53FF", // 不指定颜色
-            symbolSize: 8, //折线点的大小
-          })
-       })
-     
-      
+        this.list.push({
+          name: item.projectName,
+          type: "line",
+          data: item.code_nums,
+          //  color: "#3F53FF", // 不指定颜色
+          symbolSize: 8, //折线点的大小
+        });
+      });
+
       this.drawLine(); //折线图
     },
     drawLine() {
@@ -130,7 +149,7 @@ export default {
             fontSize: "12",
             lineHeight: "17",
           },
-          formatter: function(arg) {
+          formatter: function (arg) {
             // 自定义提示
             return (
               arg[0].name +
@@ -231,7 +250,7 @@ export default {
             },
           },
         },
-        series:this.list,
+        series: this.list,
       });
     },
   },
@@ -239,9 +258,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- .chartLine_wrap {
-    width: auto;
-    height: 800px;
-    background: #fff;
- }
+.chartLine_wrap {
+  width: auto;
+  height: 800px;
+  background: #fff;
+}
 </style>

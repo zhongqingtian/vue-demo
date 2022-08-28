@@ -1,13 +1,14 @@
 <template>
-	<div class="chartLine_wrap">
-      <div id="myChart" :style="{ width: '100%', height: '438px' }"></div>
-    </div>
+  <div class="chartLine_wrap">
+    <div id="myChart" :style="{ width: '100%', height: '438px' }"></div>
+  </div>
 </template>
 <script>
 import * as echarts from "echarts";
+import requireData from "@/utils/common";
 require("echarts/theme/macarons"); //引入主题
 export default {
- name: "hello",
+  name: "hello",
   data() {
     return {
       a: [],
@@ -19,8 +20,25 @@ export default {
 
   mounted() {
     this.searchData();
+    this.httpTest();
   },
   methods: {
+    httpTest() {
+      requireData("/baidu?tn=monline_3_dg&ie=utf-8&wd=vscode+代码格式化", null, "get", "back").then((res) => {
+        console.log(res);
+        if (res.errCode == 1000000) {
+          //let name_options = [];
+          // res.data.forEach((item) => {
+          //   // console.log(item);
+          //   name_options.push({ value: item, label: item });
+          // });
+          // this.name_options = name_options;
+        } else {
+          alert(res.msg);
+        }
+      });
+    },
+
     searchData() {
       //这里写的是假数据，实际应该是调接口，本文主要是样式的实现，这里就不写啦~
       let data = [
@@ -85,7 +103,7 @@ export default {
             fontSize: "12",
             lineHeight: "17",
           },
-          formatter: function(arg) {
+          formatter: function (arg) {
             // 自定义提示
             return (
               arg[0].name +
@@ -207,7 +225,7 @@ export default {
             type: "line",
             data: this.c,
             color: "#8DF3E8",
-            symbolSize: 8 //折线点的大小
+            symbolSize: 8, //折线点的大小
           },
         ],
       });
@@ -217,9 +235,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- .chartLine_wrap {
-    width: auto;
-    height: 438px;
-    background: #fff;
- }
+.chartLine_wrap {
+  width: auto;
+  height: 438px;
+  background: #fff;
+}
 </style>

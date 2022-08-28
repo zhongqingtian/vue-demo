@@ -42,7 +42,22 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
-    }
+    },
+    open: true,
+    // host: 'localhost',
+    // port: 8080, // 项目运行端口
+    https: false,
+    hotOnly: false,
+    proxy: {  // 配置跨域  
+      '/': {
+        target: 'http://www.baidu.com',//后端接口地址    
+        ws: false,
+        changOrigin: false,
+        pathRewrite: {
+          '^/': ''
+        }
+      }
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -85,8 +100,8 @@ module.exports = new Promise((resolve, reject) => {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
         },
         onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
+          ? utils.createNotifierCallback()
+          : undefined
       }))
 
       resolve(devWebpackConfig)
